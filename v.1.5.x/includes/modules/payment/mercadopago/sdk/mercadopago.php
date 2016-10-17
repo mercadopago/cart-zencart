@@ -12,6 +12,7 @@ $GLOBALS["LIB_LOCATION"] = dirname(__FILE__);
 class MP {
 
     const version = "0.5.2";
+    const module_version = "1.0.0";
 
     private $client_id;
     private $client_secret;
@@ -498,7 +499,7 @@ class MPRestClient {
         // Build $connect
         $connect = curl_init();
 
-        curl_setopt($connect, CURLOPT_USERAGENT, "platform:desktop,type:zencart,so:1.0.0");
+        curl_setopt($connect, CURLOPT_USERAGENT, "platform:desktop,type:zencart,so:" . MP::module_version);
         curl_setopt($connect, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($connect, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($connect, CURLOPT_CAINFO, $GLOBALS["LIB_LOCATION"] . "/cacert.pem");
