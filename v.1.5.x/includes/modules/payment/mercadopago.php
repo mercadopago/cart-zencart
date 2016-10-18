@@ -741,7 +741,9 @@ class mercadopago {
 
 				$account_settings = MPRestClient::put($request);
 
-				print_r($account_settings);
+				if($account_settings['status'] == 200){
+          return true;
+        }
 
 			}
 		}
