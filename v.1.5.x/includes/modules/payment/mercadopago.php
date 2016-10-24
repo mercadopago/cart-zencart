@@ -29,6 +29,7 @@ class mercadopago {
 		if(IS_ADMIN_FLAG){
 			$this->_checkCredentials();
 			$this->_setTextPaymentMethodsExcludeMercadoPago();
+			$this->_updateApiAccountSettings();
 		}
 
 	}
@@ -524,6 +525,18 @@ class mercadopago {
 				"date_added" => "now()"
 			),
 
+
+			array(
+				"configuration_title" => "Two Card in Basic Checkout",
+				"configuration_key" => "MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT",
+				"configuration_value" => "active",
+				"configuration_description" => "Enables the buyer to pay with two cards",
+				"configuration_group_id" => "6",
+				"sort_order" => "4",
+				"set_function" => "zen_cfg_select_option(array(\'active\', \'inactive\'), ",
+				"date_added" => "now()"
+			),
+
 			array(
 				"configuration_title" => "Sort order of display",
 				"configuration_key" => "MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER",
@@ -704,6 +717,35 @@ class mercadopago {
 			//update the text in configuration
 			$db->Execute("UPDATE " . TABLE_CONFIGURATION . "  SET configuration_description = '{$text_payment_methods}' WHERE configuration_key = 'MODULE_PAYMENT_MERCADOPAGO_PAYMENT_METHODS'; ");
 
+		}
+
+
+		function _updateApiAccountSettings(){
+
+			if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET != "")){
+				//init mercado pago
+				$mercadopago = new MP(MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID, MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET);
+				//get info user
+				$request = array(
+					"uri" => "/account/settings",
+					"params" => array(
+						"access_token" => $mercadopago->get_access_token()
+					),
+					"data" => array(
+						"two_cards" => MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT
+					),
+					"headers" => array(
+							"content-type" => "application/json"
+					)
+				);
+
+				$account_settings = MPRestClient::put($request);
+
+				if($account_settings['status'] == 200){
+          return true;
+        }
+
+			}
 		}
 
 		function _getCategoriesMercadoPago(){

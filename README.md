@@ -30,7 +30,7 @@ Great for merchants who want to get going quickly and easily.
 
 Plugin Version | Status | Compatible Versions
 -------------- | ------ | -------------------
-v1.0 | Stable (Current version) | ZenCart 1.5.x
+v1.0.1 | Stable (Current version) | ZenCart 1.5.x
 
 
 <a name="requirements"></a>
