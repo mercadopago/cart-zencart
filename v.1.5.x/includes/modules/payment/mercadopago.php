@@ -30,6 +30,7 @@ class mercadopago {
 			$this->_checkCredentials();
 			$this->_setTextPaymentMethodsExcludeMercadoPago();
 			$this->_updateApiAccountSettings();
+			$this->_updateApiAnalytics();
 		}
 
 	}
@@ -719,6 +720,38 @@ class mercadopago {
 
 		}
 
+		function _updateApiAnalytics(){
+
+			if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET != "")){
+
+				$status_module = MODULE_PAYMENT_MERCADOPAGO_STATUS;
+				$status_two_cards = MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT == "active" ? "true": "false";
+
+
+				//init mercado pago
+				$mercadopago = new MP(MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID, MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET);
+				//get info user
+				$request = array(
+					"uri" => "/modules/tracking/settings",
+					"params" => array(
+						"access_token" => $mercadopago->get_access_token()
+					),
+					"data" => array(
+						"two_cards" => strtolower($status_two_cards),
+						"checkout_basic" => $status_module,
+						"platform" => "ZenCart",
+						"platform_version" => "1.0.2"
+					),
+					"headers" => array(
+							"content-type" => "application/json"
+					)
+				);
+
+				$analytics = MPRestClient::post($request);
+
+			}
+
+		}
 
 		function _updateApiAccountSettings(){
 
@@ -740,10 +773,6 @@ class mercadopago {
 				);
 
 				$account_settings = MPRestClient::put($request);
-
-				if($account_settings['status'] == 200){
-          return true;
-        }
 
 			}
 		}
