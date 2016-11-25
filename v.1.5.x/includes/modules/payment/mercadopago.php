@@ -16,7 +16,7 @@ class mercadopago {
 		$this->description = MODULE_ADMIN_MERCADOPAGO_TEXT_DESCRIPTION;
 		$this->sort_order = MODULE_PAYMENT_MERCADOPAGO_SORT_ORDER;
 
-		$this->enabled = true;
+		$this->enabled = ((MODULE_PAYMENT_MERCADOPAGO_STATUS == 'True') ? true : false);
 
 		if ((int) MODULE_PAYMENT_MERCADOPAGO_STATUS_NEW_ORDER > 0) {
 			$this->order_status = MODULE_PAYMENT_MERCADOPAGO_STATUS_NEW_ORDER;
