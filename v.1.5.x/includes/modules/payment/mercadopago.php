@@ -740,7 +740,8 @@ class mercadopago {
 						"two_cards" => strtolower($status_two_cards),
 						"checkout_basic" => $status_module,
 						"platform" => "ZenCart",
-						"platform_version" => "1.0.2"
+						"platform_version" => PROJECT_VERSION_MAJOR . ".". PROJECT_VERSION_MINOR,
+            "module_version" => "1.0.2"
 					),
 					"headers" => array(
 							"content-type" => "application/json"
