@@ -721,7 +721,6 @@ class mercadopago {
 		}
 
 		function _updateApiAnalytics(){
-
 			if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET != "")){
 
 				$status_module = MODULE_PAYMENT_MERCADOPAGO_STATUS;
@@ -741,7 +740,8 @@ class mercadopago {
 						"checkout_basic" => $status_module,
 						"platform" => "ZenCart",
 						"platform_version" => PROJECT_VERSION_MAJOR . ".". PROJECT_VERSION_MINOR,
-            "module_version" => "1.0.2"
+            "module_version" => "1.0.2",
+						"php_version" => phpversion()
 					),
 					"headers" => array(
 							"content-type" => "application/json"
