@@ -741,7 +741,7 @@ class mercadopago {
 						"platform" => "ZenCart",
 						"platform_version" => PROJECT_VERSION_MAJOR . ".". PROJECT_VERSION_MINOR,
             "module_version" => "1.0.2",
-						"php_version" => phpversion()
+						"code_version" => phpversion()
 					),
 					"headers" => array(
 							"content-type" => "application/json"
