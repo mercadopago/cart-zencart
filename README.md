@@ -6,7 +6,7 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Setup](#setup)
-* [Feedback](#feedback)
+* [Social](#social)
 
 
 <a name="features"></a>
@@ -106,10 +106,11 @@ v1.0.1 | Stable (Current version) | ZenCart 1.5.x
   * **Live or Sandbox**: Test your payments in Mercado Pago sandbox environment;
   * **Sort order of display**: Complete the display order of Mercado Pago
 
-<a name="Feedback"></a>
-##Feedback##
+<a name="social"></a>
+##Social##
 
-We want to know your opinion, please answer the following form.
-
-* [Portuguese](http://goo.gl/forms/2n5jWHaQbfEtdy0E2)
-* [Spanish](http://goo.gl/forms/A9bm8WuqTIZ89MI22)
+Follow our facebook group and watch our videos
+<ul>
+  <li><a href="https://www.facebook.com/groups/modulos.mercadopago/?ref=ts&fref=ts" target="_blank">FACEBOOK</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLl8LGzRu2_sXxChIJm1e0xY6dU3Dj_tNi" target="_blank">YOUTUBE</a></li>
+</ul>

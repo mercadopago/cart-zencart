@@ -57,6 +57,15 @@ if(isset($_REQUEST['init_point']) && $_REQUEST['init_point'] != ''){
 }
 ?>
 
+<script src="https://secure.mlstatic.com/modules/javascript/analytics.js"></script>
+<script>
+  var MA = ModuleAnalytics;
+  MA.setToken('<?php echo MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID; ?>');
+  MA.setPaymentType('basic');
+  MA.setCheckoutType('basic');
+  MA.put();
+</script>
+
 <style>
 #mp-box{
   margin: 50px auto;
