@@ -1,6 +1,8 @@
 <?php
 include_once "mercadopago/sdk/mercadopago.php";
 
+define("MP_MODULE_VERSION", "1.0.2");
+
 class mercadopago {
 
 	var $code;
@@ -95,7 +97,7 @@ class mercadopago {
 		 $selection['id'] = $this->code;
 		 $selection['module'] = $this->title;
 		 $selection['fields'][] =  array(
-			 'field' => '<img src="' . $banner . '"><style>label[for="mercadopago-selection-title"]{width:0px;}</style>',
+			 'field' => '<img src="' . $banner . '"><style>label[for="mercadopago-selection-title"]{width:0px;}</style>' . $this->_checkoutOpen(),
 			 'tag' => "mercadopago-selection-title"
 		 );
 
@@ -721,11 +723,11 @@ class mercadopago {
 		}
 
 		function _updateApiAnalytics(){
+
 			if((defined('MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID') && defined('MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET')) && (MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID != "" && MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET != "")){
 
 				$status_module = MODULE_PAYMENT_MERCADOPAGO_STATUS;
 				$status_two_cards = MODULE_PAYMENT_MERCADOPAGO_TWO_CARDS_BASIC_CHECKOUT == "active" ? "true": "false";
-
 
 				//init mercado pago
 				$mercadopago = new MP(MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID, MODULE_PAYMENT_MERCADOPAGO_CLIENT_SECRET);
@@ -740,7 +742,7 @@ class mercadopago {
 						"checkout_basic" => $status_module,
 						"platform" => "ZenCart",
 						"platform_version" => PROJECT_VERSION_MAJOR . ".". PROJECT_VERSION_MINOR,
-            "module_version" => "1.0.2",
+            "module_version" => MP_MODULE_VERSION,
 						"code_version" => phpversion()
 					),
 					"headers" => array(
@@ -884,6 +886,25 @@ class mercadopago {
 			<a href=\"https://www.mercadopago.com/mlv/herramientas/aplicaciones\" target=\"_blank\"><b>VENEZUELA</b></a>';
 
 			return $text;
+		}
+
+		function _checkoutOpen(){
+			$html = '<script src="https://secure.mlstatic.com/modules/javascript/analytics.js"></script>';
+
+			if(MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID != ""){
+				$html .= "
+				<script>
+				var MA = ModuleAnalytics;
+				MA.setToken('" . MODULE_PAYMENT_MERCADOPAGO_CLIENT_ID . "');
+				MA.setPlatform('ZenCart');
+				MA.setPlatformVersion('" . PROJECT_VERSION_MAJOR . "." . PROJECT_VERSION_MINOR . "');
+				MA.setModuleVersion('" . MP_MODULE_VERSION . "');
+				MA.post();
+				</script>
+				";
+			}
+
+			return $html;
 		}
 
 }
