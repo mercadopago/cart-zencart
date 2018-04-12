@@ -1,7 +1,7 @@
 <?php
 include_once "mercadopago/sdk/mercadopago.php";
 
-define("MP_MODULE_VERSION", "1.0.2");
+define("MP_MODULE_VERSION", "1.0.3");
 
 class mercadopago {
 
