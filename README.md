@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/2ccfde00280b77311e2d/maintainability)](https://codeclimate.com/github/mercadopago/cart-zencart/maintainability)
+
 # ZenCart - Mercado Pago Module (v1.5.x)
 ---
 
